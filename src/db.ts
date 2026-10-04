@@ -1,16 +1,23 @@
+import dotenv from "dotenv"
 import mongoose from "mongoose";
 import { Schema,model } from "mongoose";
 
+dotenv.config()
+
 export async function Connect() {
+    try {
+        const mongoUrl = process.env.MongoDB;
 
-   try {
-     await mongoose.connect("mongodb+srv://yashsolanki1129:bOZq3irPyZVO7ghy@cluster0.fsysivt.mongodb.net/?appName=Cluster0").then(()=>{
-        console.log("Database is running succesfully!!!")
-    })
-   } catch (error) {
-     console.log(error);
-   }
+        if (!mongoUrl) {
+            throw new Error("MongoDB connection string is missing");
+        }
 
+        await mongoose.connect(mongoUrl);
+
+        console.log("Database is running successfully!!!");
+    } catch (error) {
+        console.error("Database connection failed:", error);
+    }
 }
 
 

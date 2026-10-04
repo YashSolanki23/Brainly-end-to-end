@@ -135,10 +135,13 @@ await Content.deleteMany({
 })
 
 res.json({
-  deleted
+  "msg":"deleted"
 })
 
 })
+
+
+
 
 
 app.listen(port,()=>{
