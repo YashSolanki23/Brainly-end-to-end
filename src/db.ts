@@ -55,4 +55,4 @@ const linkSchema = new mongoose.Schema({
   userId: { type:Schema.Types.ObjectId, ref: 'User', required: true },
 });
 
-const Link=mongoose.model("Link",linkSchema);
+export const Link=mongoose.model("Link",linkSchema);

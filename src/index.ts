@@ -1,10 +1,11 @@
 import express from "express"
 import  jwt  from "jsonwebtoken";
 import mongoose from "mongoose";
-import { Connect, Content, User } from "./db";
+import { Connect, Content, User,Link } from "./db";
 import cors from "cors"
 import { HashPassword, JWT_password, VerifyPassword } from "./config";
 import { middleware } from "./middleware";
+import { random } from "./utils";
 
 
 
@@ -141,6 +142,79 @@ res.json({
 })
 
 
+app.post("/api/v1/brain/share",middleware,async (req,res)=>{
+    const share=req.body.share;
+
+    if(share){
+        const existingLink=await Link.findOne({
+
+            //@ts-ignore
+             userId:req.userId
+        })
+        if(existingLink)
+        {
+            res.json({
+                hash:existingLink.hash
+            })
+
+            return;
+        }
+        const hash=random(10);
+        await Link.create({
+            //@ts-ignore
+            userId:req.userId,
+            hash:hash
+        })
+
+        res.json({
+            hash
+        })
+    }else{
+        await Link.deleteOne({
+            //@ts-ignore
+            userId:req.userId
+        });
+
+        res.json({
+           "msg":"Removed Link"
+        })
+    }
+})
+//@ts-ignore
+app.get("/api/v1/brain/:shareLink", async (req, res) => {
+    const hash = req.params.shareLink;
+
+    const link = await Link.findOne({
+        hash: hash
+    });
+
+    if (!link) {
+        res.status(404).json({
+            message: "Sorry, incorrect input"
+        });
+        return;
+    }
+
+    const content = await Content.find({
+        userId: link.userId
+    });
+
+    const user = await User.findOne({
+        _id: link.userId
+    });
+
+    if (!user) {
+        res.status(404).json({
+            message: "User not found"
+        });
+        return;
+    }
+
+    res.json({
+        username: user.username,
+        content: content
+    });
+});
 
 
 
