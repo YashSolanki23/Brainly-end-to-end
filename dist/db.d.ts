@@ -170,4 +170,55 @@ export declare const Content: mongoose.Model<{
 } & {
     __v: number;
 }>;
+export declare const Link: mongoose.Model<{
+    hash: string;
+    userId: mongoose.Types.ObjectId;
+}, {}, {}, {
+    id: string;
+}, mongoose.Document<unknown, {}, {
+    hash: string;
+    userId: mongoose.Types.ObjectId;
+}, {
+    id: string;
+}, mongoose.DefaultSchemaOptions> & Omit<{
+    hash: string;
+    userId: mongoose.Types.ObjectId;
+} & {
+    _id: mongoose.Types.ObjectId;
+} & {
+    __v: number;
+}, "id"> & mongoose.HydratedDocumentOverrides<{
+    id: string;
+}>, Schema<any, mongoose.Model<any, any, any, any, any, any, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, {
+    hash: string;
+    userId: mongoose.Types.ObjectId;
+}, mongoose.Document<unknown, {}, {
+    hash: string;
+    userId: mongoose.Types.ObjectId;
+}, {
+    id: string;
+}, mongoose.DefaultSchemaOptions> & Omit<{
+    hash: string;
+    userId: mongoose.Types.ObjectId;
+} & {
+    _id: mongoose.Types.ObjectId;
+} & {
+    __v: number;
+}, "id"> & mongoose.HydratedDocumentOverrides<{
+    id: string;
+}>, unknown, {
+    hash: string;
+    userId: mongoose.Types.ObjectId;
+} & {
+    _id: mongoose.Types.ObjectId;
+} & {
+    __v: number;
+}>, {
+    hash: string;
+    userId: mongoose.Types.ObjectId;
+} & {
+    _id: mongoose.Types.ObjectId;
+} & {
+    __v: number;
+}>;
 //# sourceMappingURL=db.d.ts.map
